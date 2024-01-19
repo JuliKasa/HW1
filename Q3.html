@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script>
+class clock {
+            constructor(hour, min, sec, country) {
+                this.hour = hour;
+                this.min = min;
+                this.sec = sec;
+                this.country = country;
+            }
+
+            ConverToSeconds() {
+                return this.hour * 3600 + this.min * 60 + this.sec;
+            }
+
+            Show() {
+                return `${String(this.hour).padStart(2, 0)}:${String(this.min).padStart(2, 0)}:${String(this.sec).padStart(2, 0)}`;
+            }
+        }
+
+        let clockArr = [];
+
+        function AddClockButton() {
+            h = parseInt(document.getElementById("hour").value);
+            m = parseInt(document.getElementById("min").value);
+            s = parseInt(document.getElementById("sec").value);
+            c = document.getElementById("country").value;
+            objClock = new clock(h, m, s, c);
+            /*alert(h);*/
+
+            clockArr.push(objClock);
+
+            document.getElementById("form").reset();
+
+            if (clockArr.length = 5) {
+                outputClock();
+            }
+        }
+
+        function outputClock() {
+            document.getElementById("outputClock").innerHTML = "";
+
+            clockArr.map(clock =>
+                document.getElementById("outputClock").innerHTML += `<p>${clock.country} ${clock.Show()} ${clock.ConverToSeconds()}</p>`
+
+            );
+        }</script>
+
+
+    <title>Q3</title>
+
+</head>
+
+
+
+<body>
+
+    <form id="form" action="/" method="post">
+        <label for="hour">Hour</label>
+        <input type="text" id="hour" name="hour" placeholder="12" required />
+        <label for="min">min</label>
+        <input type="text" id="min" name="min" placeholder="35" required />
+        <label for="sec">sec</label>
+        <input type="text" id="sec" name="sec" placeholder="55" required />
+        <label for="country">country</label>
+        <input type="text" id="country" name="country" placeholder="Israel" required />
+        <div>
+            <input type="reset" />
+        </div>
+        <div>
+            <button id="AddClockB" onclick="AddClockButton()">Add</button>
+        </div>
+    </form>
+
+    <div id="outputClock"></div>
+
+</body>
+</html>

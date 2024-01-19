@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Program</title>
+</head>
+<body>
+    <label for="counterInput">Enter Counter Value:</label>
+    <input type="number" id="counterInput">
+    <button onclick="startCounter()">Start</button>
+    <button onclick="incrementCounter()">+</button>
+    <button onclick="goAction()">Go</button>
+    <p id="output"></p>
+
+    <script>
+        class Counter {
+            constructor(initialValue) {
+                this.value = initialValue;
+            }
+
+            increment() {
+                this.value += 1;
+            }
+
+            go() {
+                return Array.from({ length: this.value + 1 }, (_, i) => i);
+            }
+        }
+
+        let counter;
+
+        function startCounter() {
+            const initialValue = parseInt(document.getElementById("counterInput").value);
+            counter = new Counter(initialValue);
+        }
+
+        function incrementCounter() {
+            if (counter) {
+                counter.increment();
+                document.getElementById("counterInput").value = counter.value;
+            }
+        }
+
+        function goAction() {
+            if (counter) {
+                const result = counter.go().join(", ");
+                document.getElementById("output").textContent = result;
+            }
+        }
+    </script>
+</body>
+</html>
